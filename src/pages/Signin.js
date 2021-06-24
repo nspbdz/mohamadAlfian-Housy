@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 
 const Signin = () => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState(null); 
   const handleChange = (e) => {
     setData({
       ...data,

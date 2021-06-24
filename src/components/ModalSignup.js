@@ -1,53 +1,52 @@
 import { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
-const ModalSignin = (props) => {
+const ModalSignup = (props) => {
   const [data, setData] = useState({
-    email: "", 
+    email: "",
     password: "",
   });
-  const { handleClose, handleLogin, show } = props;
+  const { handleClose, handleSignUp, show } = props;
 
-  const handleChange = (e) => {
-    setData({
-      ...data,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleLogin({
-      type: 'LOGIN',
-      payload: {
-        id: 1,
-        name: "Alfian",
-        email: data.email,
-        password: data.password
-      }
-    })
-
-    setData({
-      email: "",
-      password: ""
-    })
-  };
+    // fullname
+  // username
+  // email
+  // password
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Body>
-        <p className="h1 text-center font-weight-bold">Sign in</p>
-        <Form onSubmit={handleSubmit}>
+        <p className="h1 text-center font-weight-bold">Sign up</p>
+        <Form >
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Full Name</Form.Label>
+            <Form.Control
+              type="text"
+              name="text"
+              value={data.fullname}
+              // onChange={handleChange}
+              placeholder="Enter Full Name"
+            />
+          </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Username</Form.Label>
+            <Form.Control
+              type="text"
+              name="text"
+              value={data.username}
+              // onChange={handleChange}
+              placeholder="Enter Username"
+            />
+          </Form.Group>
+
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
+            <Form.Label>Email</Form.Label>
             <Form.Control
               type="email"
               name="email"
               value={data.email}
-              onChange={handleChange}
+              // onChange={handleChange}
               placeholder="Enter email"
             />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -56,7 +55,7 @@ const ModalSignin = (props) => {
               type="password"
               name="password"
               value={data.password}
-              onChange={handleChange}
+              // onChange={handleChange}
               placeholder="Password"
             />
           </Form.Group>
@@ -72,4 +71,4 @@ const ModalSignin = (props) => {
   );
 };
 
-export default ModalSignin;
+export default ModalSignup;

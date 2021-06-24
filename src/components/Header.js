@@ -8,12 +8,16 @@ import {
   Form,
   Navbar,
   Nav,
+  Col,
+  Row,
+  Image
 } from "react-bootstrap";
 
 import { UserContext } from "../contexts/userContext";
 import { CartContext } from "../contexts/cartContext";
 
 import ModalSignin from "./ModalSignin";
+import ModalSignup from "./ModalSignup";
 import brand from "../assets/images/brand.svg";
 
 import data from "../data/fakeData";
@@ -22,19 +26,27 @@ import "../styles/customStyle.css";
 const Header = () => {
   const {state, dispatch} = useContext(UserContext);
   const {state: cartState} = useContext(CartContext);
-  console.log("user context state", state)
-  console.log("cart context state", cartState)
+
+  // console.log("user context state", state)
+  // console.log("cart context state", cartState)
   const [search, setSearch] = useState("");
   const [show, setshow] = useState(false);
+  const [showSignUp,setshowSignUp] = useState(false);
 
   useEffect(() => {
     if (!state.isLogin) {
       setshow(true);
     }
     return () => {
-      setshow(false)
+      setshow(false) 
     }
   }, [state])
+  // console.log(show);
+  console.log(showSignUp);
+
+
+  
+ 
 
   const router = useHistory();
   const handlePushToSignUp = () => {
@@ -98,15 +110,29 @@ const Header = () => {
             {/* <Link to="/cart" className="nav-link mr-3 my-2">Cart {' '}
             <Badge className="bg-secondary text-white">{cartState.carts.length}</Badge>
             </Link> */}
-            <Button variant="danger" className="my-2" onClick={handleLogout}>
+            {/* <Button variant="danger" className="my-2" onClick={handleLogout}>
               Logout
-            </Button>
+            </Button> */}
+            <Row>
+    {/* <Col xs={6} md={4}>
+      <Image src="holder.js/171x180" rounded />
+    </Col> */}
+    <Col xs={2} md={2}>
+      <Image style={{width:"50px"}} src="https://cdn.chatsports.com/cache/18/e9/18e9c1eca1773b83e9c2e318d26fab02-original.jpg" roundedCircle />
+    </Col>
+    {/* <Col xs={6} md={4}>
+      <Image src="holder.js/171x180" thumbnail />
+    </Col> */}
+  </Row>
+
           </>
         )}
         {!state.isLogin && (
           <>
-            <Button className="mr-3 my-2" onClick={handlePushToSignUp}>
+            <Button className="mr-3 my-2" onClick={() => setshowSignUp(true)} > 
+            {/* setshowSignUp diambil dari props diatas sama seperti setshow ubah nama saja */}
               Sign up
+
             </Button>
             <Button className="my-2" onClick={() => setshow(true)}>
               Sign in
@@ -115,23 +141,12 @@ const Header = () => {
         )}
       </Navbar.Collapse>
       <ModalSignin show={show} handleClose={() => setshow(false)} handleLogin={dispatch}/>
+      <ModalSignup show={showSignUp} handleClose={() => setshow(false)} handleSignUp={dispatch}/>
+      {/* show={showSignUp} sesuaikan dengan  */}
+  {/* const [showSignUp,setshowSignUp] = useState(false); */}
+
     </Navbar>
   );
 };
-
-// class Header extends Component {
-//   constructor(props) {
-//     super();
-//     this.title = "Dumbways Batch 24"
-//   }
-
-//   render() {
-//     return (
-//       <header className="header">
-//         <h1>{this.title}</h1>
-//       </header>
-//     )
-//   }
-// }
 
 export default Header;
