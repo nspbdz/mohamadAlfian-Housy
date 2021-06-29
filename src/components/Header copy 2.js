@@ -97,13 +97,24 @@ const Header = () => {
         </Form>
         {state.isLogin && (
           <>
-        
+            {/* <p className="nav-link mr-3 my-2">Welcome, 
+            <span><Link to="/profile ">{state.user.name}</Link></span></p> */}
+            {/* <Link to="/cart" className="nav-link mr-3 my-2">Cart {' '}
+            <Badge className="bg-secondary text-white">{cartState.carts.length}</Badge>
+            </Link> */}
+            {/* <Button variant="danger" className="my-2" onClick={handleLogout}>
+              Logout
+            </Button> */}
             <Row>
-  
+    {/* <Col xs={6} md={4}>
+      <Image src="holder.js/171x180" rounded />
+    </Col> */}
     <Col xs={2} md={2}>
       <Image style={{width:"50px"}} src="https://cdn.chatsports.com/cache/18/e9/18e9c1eca1773b83e9c2e318d26fab02-original.jpg" roundedCircle />
     </Col>
-  
+    {/* <Col xs={6} md={4}>
+      <Image src="holder.js/171x180" thumbnail />
+    </Col> */}
   </Row>
 
           </>

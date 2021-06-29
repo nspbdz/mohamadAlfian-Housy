@@ -41,8 +41,8 @@ console.log(datas)
             type: "LOGIN_SUCCESS",
             // payload: dataLogin
             payload: {
-        name: "Alfian",
-
+              // data yang akan dikirim
+                    name: "Alfian",
                     username: data.username,
                     password: data.password
                   }
