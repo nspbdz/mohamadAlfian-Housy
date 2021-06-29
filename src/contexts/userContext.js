@@ -5,45 +5,38 @@ export const UserContext = createContext();
 const initialState = {
   isLogin: false,
   user: {
-    id: null,
-    name: '',
-    email: '',
+    username: '',
     password: '',
   }
 }
+const reducer = (state, action) =>{
+  const { type, payload } = action
 
-const userReducer = (state, action) => {
-  const {type, payload} = action;
+  switch(type){
+      case "LOGIN_SUCCESS":
+          return {
+            ...state,
+              isLogin: true,
+              user: payload
+          }
+      case "LOGOUT":
+          return {
+            ...state,
+              isLogin: false,
+              user: {},
+              
+          }
 
-  switch(type) {
-    case 'LOGIN':
-      return {
-        ...state,
-        user: payload,
-        isLogin: true
-      }
-
-    case 'LOGOUT':
-      return {
-        ...state,
-        user: {
-          id: null,
-          name: '',
-          email: '',
-          password: '',
-        },
-        isLogin: false
-      }
-    default:
-      throw new Error('case unknown');
+      default:
+          throw new Error();
   }
 }
 
 export const UserContextProvider = ({children}) => {
-  const [state, dispatch] = useReducer(userReducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <UserContext.Provider value={{ state, dispatch }}>
+    <UserContext.Provider value={[ state, dispatch ]}>
       {children}
     </UserContext.Provider>
   )
