@@ -12,7 +12,7 @@ class Amenities extends React.Component {
         return (
             <>
     
-        <p className="h3 text-left font-weight-bold">Property Room</p> 
+        <p className="h3 text-left font-weight-bold">Amenities</p> 
          <Row>
             <Col sm><p className=""> Furnished</p></Col>
             <Col sm></Col>
@@ -22,7 +22,7 @@ class Amenities extends React.Component {
         </Row>
 
         <Row>
-            <Col sm><p className=""> Furnished</p></Col>
+            <Col sm><p className=""> Pet Allowed</p></Col>
             <Col sm></Col>
             <Col sm>   
             <Form.Check aria-label="option 1" />
@@ -30,7 +30,7 @@ class Amenities extends React.Component {
         </Row>
 
         <Row>
-            <Col sm><p className=""> Furnished</p></Col>
+            <Col sm><p className="">Shared Accomodation</p></Col>
             <Col sm></Col>
             <Col sm>   
             <Form.Check aria-label="option 1" />

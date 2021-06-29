@@ -19,7 +19,7 @@ class Budget extends React.Component {
                 Less Than IDR.
                 </Form.Label>
                 <Col sm="8">
-                <Form.Control />
+                <Form.Control style={{width:"237px"}} />
                 </Col>
             </Form.Group>
             </Form>

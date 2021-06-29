@@ -33,14 +33,14 @@ class TypeRent extends React.Component {
             <>
         <p className="h3 text-left font-weight-bold">Type Of Rent</p>
 
-             <button id="btn" className={btn_day} onClick={this.changeDay.bind(this)}>
+             <button id="btnd" className={btn_day} onClick={this.changeDay.bind(this)}>
                   Day
              </button>
              
-             <button id="btn" className={btn_month} onClick={this.changeMonth.bind(this)}>
+             <button id="btnd" className={btn_month} onClick={this.changeMonth.bind(this)}>
               Mont
              </button>
-            <button id="btn" className={btn_year} onClick={this.changeYear.bind(this)}>
+            <button id="btnd" className={btn_year} onClick={this.changeYear.bind(this)}>
                 Year
             </button>
             </>

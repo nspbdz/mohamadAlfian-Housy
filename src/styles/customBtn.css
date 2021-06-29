@@ -1,7 +1,16 @@
 #btn{
-  width: 60px;
+  width: 55px;
   height: 40px;
   margin: 15px;
+}
+#btnd{
+  width: 100px;
+  height: 50px;
+  margin: 15px;
+}
+#datestyle{
+  width: 375px;
+
 }
 .blueButton{
   background-color: blue;

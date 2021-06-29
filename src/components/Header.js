@@ -141,10 +141,10 @@ const Header = () => {
         )}
       </Navbar.Collapse>
       <ModalSignin show={show} handleClose={() => setshow(false)} handleLogin={dispatch}/>
-      <ModalSignup show={showSignUp} handleClose={() => setshow(false)} handleSignUp={dispatch}/>
-      {/* show={showSignUp} sesuaikan dengan  */}
-  {/* const [showSignUp,setshowSignUp] = useState(false); */}
+      <ModalSignup show={showSignUp} handleClose={() => setshowSignUp(false)} handleSignUp={dispatch}/>
 
+      {/* show={showSignUp} sesuaikan dengan  */}
+      
     </Navbar>
   );
 };

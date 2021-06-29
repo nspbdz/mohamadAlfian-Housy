@@ -2,8 +2,6 @@ import { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 const ModalSignup = (props) => {
   const [data, setData] = useState({
-    email: "",
-    password: "",
   });
   const { handleClose, handleSignUp, show } = props;
 
@@ -11,6 +9,32 @@ const ModalSignup = (props) => {
   // username
   // email
   // password
+  
+  const handleChange = (e) => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleSignUp({
+      type: 'LOGIN',
+      payload: {
+        id: 1,
+        name: "Alfian",
+        email: data.email,
+        password: data.password
+      }
+    })
+
+    setData({
+      email: "",
+      password: ""
+    })
+  };
+
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Body>
@@ -22,7 +46,7 @@ const ModalSignup = (props) => {
               type="text"
               name="text"
               value={data.fullname}
-              // onChange={handleChange}
+              onChange={handleChange}
               placeholder="Enter Full Name"
             />
           </Form.Group>
@@ -33,7 +57,7 @@ const ModalSignup = (props) => {
               type="text"
               name="text"
               value={data.username}
-              // onChange={handleChange}
+              onChange={handleChange}
               placeholder="Enter Username"
             />
           </Form.Group>
@@ -44,7 +68,7 @@ const ModalSignup = (props) => {
               type="email"
               name="email"
               value={data.email}
-              // onChange={handleChange}
+              onChange={handleChange}
               placeholder="Enter email"
             />
           </Form.Group>
@@ -55,14 +79,15 @@ const ModalSignup = (props) => {
               type="password"
               name="password"
               value={data.password}
-              // onChange={handleChange}
+              onChange={handleChange}
               placeholder="Password"
             />
           </Form.Group>
+          
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Check me out" />
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Button variant="primary" >
             Submit
           </Button>
         </Form>

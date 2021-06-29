@@ -9,9 +9,9 @@ class Date extends React.Component{
             <div>
                 <div className="row">
                     <div className="col-md-4">
-              <p className="h3 text-left font-weight-bold">Date</p>
+                     <p className="h3 text-left font-weight-bold">Date</p>
                         
-                        <Form.Group controlId="dob">
+                        <Form.Group controlId="dob" id="datestyle">
                             <Form.Label>Select Date</Form.Label>
                             <Form.Control type="date" name="dob" placeholder="Date of Birth" />
                         </Form.Group>
