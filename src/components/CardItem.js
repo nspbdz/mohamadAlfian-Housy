@@ -21,7 +21,7 @@ function CardItem({ item, isProduct, handleClick }) {
       />
       <Card.Body>
       <div class="card-img-overlay">
-      <Card.Title style={{color:"black",textShadow:"2px, 2px"}}></Card.Title>
+      <Card.Title style={{color:"black",textShadow:"2px, 2px"}}  > </Card.Title>
         </div>
         <Card.Title>Rp.{item.price} / {item.duration} </Card.Title>
 

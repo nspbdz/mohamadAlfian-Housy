@@ -7,12 +7,14 @@ const initialState = {
   carts: [],
   totalAmount: 0
 }
+
 const cartReducer = (state, action) => {
   const {type, data} = action;
-  console.log(data.id)
+  console.log(data)
   switch (type) {
     case "ADD_PRODUCT":
       const isProductExist = state.carts.find(product => product.id === data.id);
+      console.log(state.carts)
       if(isProductExist) {
         const updatedProduct = state.carts.map(product => {
           if (product.id === data.id) {

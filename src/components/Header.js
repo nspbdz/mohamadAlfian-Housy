@@ -9,6 +9,7 @@ import data from "../data/fakeData";
 import brand from "../assets/images/brand.svg";
 
 import "../styles/customStyle.css";
+import Dropd from "./Dropd";
 function Header() {
   const [state, dispatch] = useContext(UserContext);
   const [showSignUp,setshowSignUp,handleSignUp] = useState(false);
@@ -46,7 +47,7 @@ function Header() {
                         :
                         
                         // <Button onClick={handleShow} className="mr-3 my-2">Logout</Button>
-                        <Image style={{width:"50px"}} src="https://ujhw03sswsepgw3234x0qm51-wpengine.netdna-ssl.com/wp-content/uploads/2018/05/171025-202659-Donnely-Christopher-400x400x72.jpg" roundedCircle />
+                      <Dropd />
 
                      }
 

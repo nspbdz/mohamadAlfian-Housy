@@ -1,13 +1,15 @@
 import { Row, Col,Form } from "react-bootstrap";
 import React, { Component } from "react";
-import { useHistory,Router,Link } from "react-router-dom";
+import { useHistory,Router } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
 import data from "../data/fakeData";
 import styles from "./Filter.module.css";
 import TypeRent from "./TypeRent";
 import CardItem from "../components/CardItem"
 
+
 class Filter extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -133,14 +135,17 @@ class Filter extends Component {
    
    
       handleCard = ev => {
+        
         const CardVal =ev.currentTarget.dataset.div_id
         console.log(CardVal)
-       
+        router.push("/profile");
 
       }
   
 
   render() {
+    
+    
     const bathrooms = ["1", "2", "3","4","5+"];
     const bedrooms = ["1", "2", "3","4","5+"];
     const rents = ["day", "month", "year"];
@@ -270,11 +275,7 @@ class Filter extends Component {
           }
        console.log(Fur)
          return (
-          <Col key={index} key={item.id} id={item.id} >
-            <Link to={{
-              id:item.id,
-              pathname: `/detailProperty/${item.id}`
-            }} >
+          <Col key={index}>
           
                         <Card  data-div_id={item.id} onClick={this.handleCard}  style={{ width: "18rem", marginBottom: "10px" }}>
                     <Card.Img  variant="top" src={item.image} height={200} style={{ objectFit: "cover" }}   />
@@ -293,7 +294,6 @@ class Filter extends Component {
                       <Card.Text>{item.address}</Card.Text>
                     </Card.Body>
                   </Card>
-                  </Link>
       
           </Col>
         )
@@ -317,20 +317,16 @@ class Filter extends Component {
           }
        console.log(Fur)
          return (
-          <Col key={index} key={item.id} id={item.id} >
-            <Link to={{
-              id:item.id,
-              pathname: `/detailProperty/${item.id}`
-            }} >
-         <Card style={{ width: "18rem", marginBottom: "10px" }}>
+          <Col key={index}>
+                        <Card style={{ width: "18rem", marginBottom: "10px" }}>
                     <Card.Img  variant="top" src={item.image} height={200} style={{ objectFit: "cover" }}   />
                     <Card.Body>
                     <div class="card-img-overlay">
                     <Card.Title style={{color:"black",textShadow:"2px, 2px"}}>
                                 <div className="room__amenity" >
-                                  <p style={{backgroundColor:"white",width:"150px"}}>{Fur}</p>
-                                  <p style={{backgroundColor:"white",width:"150px"}}>{Pet}</p>
-                                  <h5 style={{backgroundColor:"white",width:"150px"}}>{Share}</h5>
+                                  <p>{Fur}</p>
+                                  <p>{Pet}</p>
+                                  <h5>{Share}</h5>
                                 </div>
                               </Card.Title>
                       </div>
@@ -339,7 +335,6 @@ class Filter extends Component {
                       <Card.Text>{item.address}</Card.Text>
                     </Card.Body>
                   </Card>
-          </Link>
           </Col>
       
         )
@@ -364,12 +359,8 @@ class Filter extends Component {
           }
        console.log(Fur)
          return (
-          <Col key={index} key={item.id} id={item.id} >
-            <Link to={{
-              id:item.id,
-              pathname: `/detailProperty/${item.id}`
-            }} >
-         <Card style={{ width: "18rem", marginBottom: "10px" }}>
+          <Col key={index}>
+                        <Card style={{ width: "18rem", marginBottom: "10px" }}>
                     <Card.Img  variant="top" src={item.image} height={200} style={{ objectFit: "cover" }}   />
                     <Card.Body>
                     <div class="card-img-overlay">
@@ -386,7 +377,6 @@ class Filter extends Component {
                       <Card.Text>{item.address}</Card.Text>
                     </Card.Body>
                   </Card>
-          </Link>
           </Col>
       
         )
@@ -411,20 +401,16 @@ class Filter extends Component {
           }
        console.log(Fur)
          return (
-          <Col key={index} key={item.id} id={item.id} >
-            <Link to={{
-              id:item.id,
-              pathname: `/detailProperty/${item.id}`
-            }} >
-         <Card style={{ width: "18rem", marginBottom: "10px" }}>
+          <Col key={index}>
+                        <Card style={{ width: "18rem", marginBottom: "10px" }}>
                     <Card.Img  variant="top" src={item.image} height={200} style={{ objectFit: "cover" }}   />
                     <Card.Body>
                     <div class="card-img-overlay">
                     <Card.Title style={{color:"black",textShadow:"2px, 2px"}}>
                                 <div className="room__amenity" >
-                                  <p style={{backgroundColor:"white",width:"150px"}}>{Fur}</p>
-                                  <p style={{backgroundColor:"white",width:"150px"}}>{Pet}</p>
-                                  <h5 style={{backgroundColor:"white",width:"150px"}}>{Share}</h5>
+                                  <p>{Fur}</p>
+                                  <p>{Pet}</p>
+                                  <h5>{Share}</h5>
                                 </div>
                               </Card.Title>
                       </div>
@@ -433,7 +419,6 @@ class Filter extends Component {
                       <Card.Text>{item.address}</Card.Text>
                     </Card.Body>
                   </Card>
-          </Link>
           </Col>
       
         )
@@ -457,12 +442,8 @@ class Filter extends Component {
           }
        console.log(Fur)
          return (
-          <Col key={index} key={item.id} id={item.id} >
-            <Link to={{
-              id:item.id,
-              pathname: `/detailProperty/${item.id}`
-            }} >
-         <Card style={{ width: "18rem", marginBottom: "10px" }}>
+          <Col key={index}>
+                        <Card style={{ width: "18rem", marginBottom: "10px" }}>
                     <Card.Img  variant="top" src={item.image} height={200} style={{ objectFit: "cover" }}   />
                     <Card.Body>
                     <div class="card-img-overlay">
@@ -479,7 +460,6 @@ class Filter extends Component {
                       <Card.Text>{item.address}</Card.Text>
                     </Card.Body>
                   </Card>
-          </Link>
           </Col>
       
         )
@@ -503,12 +483,8 @@ class Filter extends Component {
           }
        console.log(Fur)
          return (
-          <Col key={index} key={item.id} id={item.id} >
-            <Link to={{
-              id:item.id,
-              pathname: `/detailProperty/${item.id}`
-            }} >
-         <Card style={{ width: "18rem", marginBottom: "10px" }}>
+          <Col key={index}>
+                        <Card style={{ width: "18rem", marginBottom: "10px" }}>
                     <Card.Img  variant="top" src={item.image} height={200} style={{ objectFit: "cover" }}   />
                     <Card.Body>
                     <div class="card-img-overlay">
@@ -525,7 +501,6 @@ class Filter extends Component {
                       <Card.Text>{item.address}</Card.Text>
                     </Card.Body>
                   </Card>
-          </Link>
           </Col>
       
         )
@@ -550,12 +525,8 @@ class Filter extends Component {
           }
        console.log(Fur)
          return (
-          <Col key={index} key={item.id} id={item.id} >
-            <Link to={{
-              id:item.id,
-              pathname: `/detailProperty/${item.id}`
-            }} >
-         <Card style={{ width: "18rem", marginBottom: "10px" }}>
+          <Col key={index}>
+                        <Card style={{ width: "18rem", marginBottom: "10px" }}>
                     <Card.Img  variant="top" src={item.image} height={200} style={{ objectFit: "cover" }}   />
                     <Card.Body>
                     <div class="card-img-overlay">
@@ -572,7 +543,6 @@ class Filter extends Component {
                       <Card.Text>{item.address}</Card.Text>
                     </Card.Body>
                   </Card>
-          </Link>
           </Col>
       
         )
