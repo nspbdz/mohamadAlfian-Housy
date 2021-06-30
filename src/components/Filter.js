@@ -1,9 +1,11 @@
 import { Row, Col,Form } from "react-bootstrap";
 import React, { Component } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory,Router,Link } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
 import data from "../data/fakeData";
 import styles from "./Filter.module.css";
+import TypeRent from "./TypeRent";
+import CardItem from "../components/CardItem"
 
 class Filter extends Component {
   constructor(props) {
@@ -26,6 +28,7 @@ class Filter extends Component {
           this.handleFurnishedchange = this.handleFurnishedchange.bind(this);
           this.handlePetchange = this.handlePetchange.bind(this);
           this.handleSharechange = this.handleSharechange.bind(this);
+          this.handleCard = this.handleCard.bind(this);
     
   }
 
@@ -127,13 +130,17 @@ class Filter extends Component {
             PetAllowed: "",
         })
       }
-  
    
-    
-  render() {
+   
+      handleCard = ev => {
+        const CardVal =ev.currentTarget.dataset.div_id
+        console.log(CardVal)
+       
+
+      }
   
 
-
+  render() {
     const bathrooms = ["1", "2", "3","4","5+"];
     const bedrooms = ["1", "2", "3","4","5+"];
     const rents = ["day", "month", "year"];
@@ -144,13 +151,14 @@ class Filter extends Component {
     const FurnishedToShow = this.state.data.filter(item => ( item.Furnished === this.state.Furnished));
     const PetToShow = this.state.data.filter(item => ( item.PetAllowed === this.state.PetAllowed));
     const SharedToShow = this.state.data.filter(item => ( item.SharedCommodities === this.state.SharedCommodities));
+    const rr=this.state.rent;
+    console.log(rr);
     
     return (
         <div>
         <Row>
           <Col xs={4}>
-      
-      
+      <>
         <p className="h3 text-left font-weight-bold">Type Of Rent</p>
 
           <form >
@@ -206,7 +214,7 @@ class Filter extends Component {
   <p className="h3 text-left font-weight-bold">Amenities</p> 
         
       
-  <Row>
+        <Row>
             <Col sm><p className=""> Furnished</p></Col>
             <Col sm></Col>
             <Col sm>   
@@ -220,7 +228,7 @@ class Filter extends Component {
         </Row>
 
         <Row>
-            <Col sm><p className=""> Shared ACommodities</p></Col>
+            <Col sm><p> Shared Acommodities</p></Col>
             <Col sm></Col>
             <Col sm>   
             <form> <input value="true" checked={this.state.SharedCommodities === true } onChange={this.handleSharechange} type="radio"  />  </form>  </Col>
@@ -229,8 +237,8 @@ class Filter extends Component {
         <label column sm="4 ">
                 Less Than IDR.
                 </label>
-   <input type="text"  onChange={this.handlePriceChange} value={this.state.price} />
-   <Row>
+        <input type="text"  onChange={this.handlePriceChange} value={this.state.price} />
+         <Row>
             <Col sm></Col>
             <Col sm></Col>
             <Col sm>   
@@ -239,259 +247,340 @@ class Filter extends Component {
             </Button>
             </Col>
         </Row>
+
+          </>
           </Col>
-          <Col>
+
+        <Col xs={8}>
           <>
           
-        
-        {bedroomsToShow.map( item => {
+          <Row>
+      {bedroomsToShow.map( (item,index)  => {
        const FurnishedValuex=item.Furnished
        const PetValuex=item.PetAllowed
        const ShareValuex=item.SharedCommodities
        if(FurnishedValuex === true){
            var Fur="Furnished"
-       }
-       if(PetValuex === true){
-        var Pet="Pet Allowed"
-    }
-    if(ShareValuex === true){
-        var Share="Shared ACommodities"
-    }
+            }
+            if(PetValuex === true){
+              var Pet="Pet Allowed"
+          }
+          if(ShareValuex === true){
+              var Share="Shared ACommodities"
+          }
        console.log(Fur)
-        return <div>
-             <Card style={{ width: "18rem", marginBottom: "10px" }}>
-      <Card.Img  variant="top" src={item.image} height={200} style={{ objectFit: "cover" }}   />
-      <Card.Body>
-      <div class="card-img-overlay">
-      <Card.Title style={{color:"black",textShadow:"2px, 2px"}}>
-                  <div className="room__amenity" >
-                    <p>{Fur}</p>
-                    <p>{Pet}</p>
-                    <h5>{Share}</h5>
-                  </div>
-                </Card.Title>
-        </div>
-        <Card.Title>Rp.{item.price} / {item.rent} <p>{Fur}</p> </Card.Title>
-        <Card.Text>{item.bedroom} Beds,{item.bedroom}bedroom</Card.Text>
-        <Card.Text>{item.address}</Card.Text>
-      </Card.Body>
-    </Card>
-            </div>
+         return (
+          <Col key={index} key={item.id} id={item.id} >
+            <Link to={{
+              id:item.id,
+              pathname: `/detailProperty/${item.id}`
+            }} >
+          
+                        <Card  data-div_id={item.id} onClick={this.handleCard}  style={{ width: "18rem", marginBottom: "10px" }}>
+                    <Card.Img  variant="top" src={item.image} height={200} style={{ objectFit: "cover" }}   />
+                    <Card.Body>
+                    <div class="card-img-overlay">
+                    <Card.Title style={{color:"black",textShadow:"2px, 2px"}}>
+                                <div className="room__amenity" >
+                                  <p>{Fur}</p>
+                                  <p>{Pet}</p>
+                                  <h5>{Share}</h5>
+                                </div>
+                              </Card.Title>
+                      </div>
+                      <Card.Title>Rp.{item.price} / {item.rent} <p>{Fur}</p> </Card.Title>
+                      <Card.Text>{item.bedroom} Beds,{item.bedroom}bedroom</Card.Text>
+                      <Card.Text>{item.address}</Card.Text>
+                    </Card.Body>
+                  </Card>
+                  </Link>
+      
+          </Col>
+        )
+           
     })
 }
+</Row>
+<Row>
+      {rentToShow.map( (item,index)  => {
+       const FurnishedValuex=item.Furnished
+       const PetValuex=item.PetAllowed
+       const ShareValuex=item.SharedCommodities
+       if(FurnishedValuex === true){
+           var Fur="Furnished"
+            }
+            if(PetValuex === true){
+              var Pet="Pet Allowed"
+          }
+          if(ShareValuex === true){
+              var Share="Shared ACommodities"
+          }
+       console.log(Fur)
+         return (
+          <Col key={index} key={item.id} id={item.id} >
+            <Link to={{
+              id:item.id,
+              pathname: `/detailProperty/${item.id}`
+            }} >
+         <Card style={{ width: "18rem", marginBottom: "10px" }}>
+                    <Card.Img  variant="top" src={item.image} height={200} style={{ objectFit: "cover" }}   />
+                    <Card.Body>
+                    <div class="card-img-overlay">
+                    <Card.Title style={{color:"black",textShadow:"2px, 2px"}}>
+                                <div className="room__amenity" >
+                                  <p style={{backgroundColor:"white",width:"150px"}}>{Fur}</p>
+                                  <p style={{backgroundColor:"white",width:"150px"}}>{Pet}</p>
+                                  <h5 style={{backgroundColor:"white",width:"150px"}}>{Share}</h5>
+                                </div>
+                              </Card.Title>
+                      </div>
+                      <Card.Title>Rp.{item.price} / {item.rent} <p>{Fur}</p> </Card.Title>
+                      <Card.Text>{item.bedroom} Beds,{item.bedroom}bedroom</Card.Text>
+                      <Card.Text>{item.address}</Card.Text>
+                    </Card.Body>
+                  </Card>
+          </Link>
+          </Col>
+      
+        )
+           
+    })
+}
+</Row>
    
-{rentToShow.map( item => {
+<Row>
+      {bathroomsToShow.map( (item,index)  => {
        const FurnishedValuex=item.Furnished
        const PetValuex=item.PetAllowed
        const ShareValuex=item.SharedCommodities
        if(FurnishedValuex === true){
            var Fur="Furnished"
-       }
-       if(PetValuex === true){
-        var Pet="Pet Allowed"
-    }
-    if(ShareValuex === true){
-        var Share="Shared ACommodities"
-    }
+            }
+            if(PetValuex === true){
+              var Pet="Pet Allowed"
+          }
+          if(ShareValuex === true){
+              var Share="Shared ACommodities"
+          }
        console.log(Fur)
-        return <div>
-             <Card style={{ width: "18rem", marginBottom: "10px" }}>
-      <Card.Img  variant="top" src={item.image} height={200} style={{ objectFit: "cover" }}   />
-      <Card.Body>
-      <div class="card-img-overlay">
-      <Card.Title style={{color:"black",textShadow:"2px, 2px"}}>
-                  <div className="room__amenity" >
-                    <p>{Fur}</p>
-                    <p>{Pet}</p>
-                    <h5>{Share}</h5>
-                  </div>
-                </Card.Title>
-        </div>
-        <Card.Title>Rp.{item.price} / {item.rent} <p>{Fur}</p> </Card.Title>
-        <Card.Text>{item.bedroom} Beds,{item.bedroom}bedroom</Card.Text>
-        <Card.Text>{item.address}</Card.Text>
-      </Card.Body>
-    </Card>
-            </div>
+         return (
+          <Col key={index} key={item.id} id={item.id} >
+            <Link to={{
+              id:item.id,
+              pathname: `/detailProperty/${item.id}`
+            }} >
+         <Card style={{ width: "18rem", marginBottom: "10px" }}>
+                    <Card.Img  variant="top" src={item.image} height={200} style={{ objectFit: "cover" }}   />
+                    <Card.Body>
+                    <div class="card-img-overlay">
+                    <Card.Title style={{color:"black",textShadow:"2px, 2px"}}>
+                                <div className="room__amenity" >
+                                  <p>{Fur}</p>
+                                  <p>{Pet}</p>
+                                  <h5>{Share}</h5>
+                                </div>
+                              </Card.Title>
+                      </div>
+                      <Card.Title>Rp.{item.price} / {item.rent} <p>{Fur}</p> </Card.Title>
+                      <Card.Text>{item.bedroom} Beds,{item.bedroom}bedroom</Card.Text>
+                      <Card.Text>{item.address}</Card.Text>
+                    </Card.Body>
+                  </Card>
+          </Link>
+          </Col>
+      
+        )
+           
     })
 }
+</Row>
 
-{bathroomsToShow.map( item => {
+<Row>
+      {priceToShow.map( (item,index)  => {
        const FurnishedValuex=item.Furnished
        const PetValuex=item.PetAllowed
        const ShareValuex=item.SharedCommodities
        if(FurnishedValuex === true){
            var Fur="Furnished"
-       }
-       if(PetValuex === true){
-        var Pet="Pet Allowed"
-    }
-    if(ShareValuex === true){
-        var Share="Shared ACommodities"
-    }
+            }
+            if(PetValuex === true){
+              var Pet="Pet Allowed"
+          }
+          if(ShareValuex === true){
+              var Share="Shared ACommodities"
+          }
        console.log(Fur)
-        return <div>
-             <Card style={{ width: "18rem", marginBottom: "10px" }}>
-      <Card.Img  variant="top" src={item.image} height={200} style={{ objectFit: "cover" }}   />
-      <Card.Body>
-      <div class="card-img-overlay">
-      <Card.Title style={{color:"black",textShadow:"2px, 2px"}}>
-                  <div className="room__amenity" >
-                    <p>{Fur}</p>
-                    <p>{Pet}</p>
-                    <h5>{Share}</h5>
-                  </div>
-                </Card.Title>
-        </div>
-        <Card.Title>Rp.{item.price} / {item.rent} <p>{Fur}</p> </Card.Title>
-        <Card.Text>{item.bedroom} Beds,{item.bedroom}bedroom</Card.Text>
-        <Card.Text>{item.address}</Card.Text>
-      </Card.Body>
-    </Card>
-            </div>
+         return (
+          <Col key={index} key={item.id} id={item.id} >
+            <Link to={{
+              id:item.id,
+              pathname: `/detailProperty/${item.id}`
+            }} >
+         <Card style={{ width: "18rem", marginBottom: "10px" }}>
+                    <Card.Img  variant="top" src={item.image} height={200} style={{ objectFit: "cover" }}   />
+                    <Card.Body>
+                    <div class="card-img-overlay">
+                    <Card.Title style={{color:"black",textShadow:"2px, 2px"}}>
+                                <div className="room__amenity" >
+                                  <p style={{backgroundColor:"white",width:"150px"}}>{Fur}</p>
+                                  <p style={{backgroundColor:"white",width:"150px"}}>{Pet}</p>
+                                  <h5 style={{backgroundColor:"white",width:"150px"}}>{Share}</h5>
+                                </div>
+                              </Card.Title>
+                      </div>
+                      <Card.Title>Rp.{item.price} / {item.rent} <p>{Fur}</p> </Card.Title>
+                      <Card.Text>{item.bedroom} Beds,{item.bedroom}bedroom</Card.Text>
+                      <Card.Text>{item.address}</Card.Text>
+                    </Card.Body>
+                  </Card>
+          </Link>
+          </Col>
+      
+        )
+           
     })
 }
+</Row>
+<Row>
+      {SharedToShow.map( (item,index)  => {
+       const FurnishedValuex=item.Furnished
+       const PetValuex=item.PetAllowed
+       const ShareValuex=item.SharedCommodities
+       if(FurnishedValuex === true){
+           var Fur="Furnished"
+            }
+            if(PetValuex === true){
+              var Pet="Pet Allowed"
+          }
+          if(ShareValuex === true){
+              var Share="Shared ACommodities"
+          }
+       console.log(Fur)
+         return (
+          <Col key={index} key={item.id} id={item.id} >
+            <Link to={{
+              id:item.id,
+              pathname: `/detailProperty/${item.id}`
+            }} >
+         <Card style={{ width: "18rem", marginBottom: "10px" }}>
+                    <Card.Img  variant="top" src={item.image} height={200} style={{ objectFit: "cover" }}   />
+                    <Card.Body>
+                    <div class="card-img-overlay">
+                    <Card.Title style={{color:"black",textShadow:"2px, 2px"}}>
+                                <div className="room__amenity" >
+                                  <p>{Fur}</p>
+                                  <p>{Pet}</p>
+                                  <h5>{Share}</h5>
+                                </div>
+                              </Card.Title>
+                      </div>
+                      <Card.Title>Rp.{item.price} / {item.rent} <p>{Fur}</p> </Card.Title>
+                      <Card.Text>{item.bedroom} Beds,{item.bedroom}bedroom</Card.Text>
+                      <Card.Text>{item.address}</Card.Text>
+                    </Card.Body>
+                  </Card>
+          </Link>
+          </Col>
+      
+        )
+           
+    })
+}
+</Row>
+<Row>
+      {PetToShow.map( (item,index)  => {
+       const FurnishedValuex=item.Furnished
+       const PetValuex=item.PetAllowed
+       const ShareValuex=item.SharedCommodities
+       if(FurnishedValuex === true){
+           var Fur="Furnished"
+            }
+            if(PetValuex === true){
+              var Pet="Pet Allowed"
+          }
+          if(ShareValuex === true){
+              var Share="Shared ACommodities"
+          }
+       console.log(Fur)
+         return (
+          <Col key={index} key={item.id} id={item.id} >
+            <Link to={{
+              id:item.id,
+              pathname: `/detailProperty/${item.id}`
+            }} >
+         <Card style={{ width: "18rem", marginBottom: "10px" }}>
+                    <Card.Img  variant="top" src={item.image} height={200} style={{ objectFit: "cover" }}   />
+                    <Card.Body>
+                    <div class="card-img-overlay">
+                    <Card.Title style={{color:"black",textShadow:"2px, 2px"}}>
+                                <div className="room__amenity" >
+                                  <p>{Fur}</p>
+                                  <p>{Pet}</p>
+                                  <h5>{Share}</h5>
+                                </div>
+                              </Card.Title>
+                      </div>
+                      <Card.Title>Rp.{item.price} / {item.rent} <p>{Fur}</p> </Card.Title>
+                      <Card.Text>{item.bedroom} Beds,{item.bedroom}bedroom</Card.Text>
+                      <Card.Text>{item.address}</Card.Text>
+                    </Card.Body>
+                  </Card>
+          </Link>
+          </Col>
+      
+        )
+           
+    })
+}
+</Row>
 
-        {priceToShow.map( item => {
+<Row>
+      {FurnishedToShow.map( (item,index)  => {
        const FurnishedValuex=item.Furnished
        const PetValuex=item.PetAllowed
        const ShareValuex=item.SharedCommodities
        if(FurnishedValuex === true){
            var Fur="Furnished"
-       }
-       if(PetValuex === true){
-        var Pet="Pet Allowed"
-    }
-    if(ShareValuex === true){
-        var Share="Shared ACommodities"
-    }
+            }
+            if(PetValuex === true){
+              var Pet="Pet Allowed"
+          }
+          if(ShareValuex === true){
+              var Share="Shared ACommodities"
+          }
        console.log(Fur)
-        return <div>
-             <Card style={{ width: "18rem", marginBottom: "10px" }}>
-      <Card.Img  variant="top" src={item.image} height={200} style={{ objectFit: "cover" }}   />
-      <Card.Body>
-      <div class="card-img-overlay">
-      <Card.Title style={{color:"black",textShadow:"2px, 2px"}}>
-                  <div className="room__amenity" >
-                    <p>{Fur}</p>
-                    <p>{Pet}</p>
-                    <h5>{Share}</h5>
-                  </div>
-                </Card.Title>
-        </div>
-        <Card.Title>Rp.{item.price} / {item.rent} <p>{Fur}</p> </Card.Title>
-        <Card.Text>{item.bedroom} Beds,{item.bedroom}bedroom</Card.Text>
-        <Card.Text>{item.address}</Card.Text>
-      </Card.Body>
-    </Card>
-            </div>
+         return (
+          <Col key={index} key={item.id} id={item.id} >
+            <Link to={{
+              id:item.id,
+              pathname: `/detailProperty/${item.id}`
+            }} >
+         <Card style={{ width: "18rem", marginBottom: "10px" }}>
+                    <Card.Img  variant="top" src={item.image} height={200} style={{ objectFit: "cover" }}   />
+                    <Card.Body>
+                    <div class="card-img-overlay">
+                    <Card.Title style={{color:"black",textShadow:"2px, 2px"}}>
+                                <div className="room__amenity" >
+                                  <p>{Fur}</p>
+                                  <p>{Pet}</p>
+                                  <h5>{Share}</h5>
+                                </div>
+                              </Card.Title>
+                      </div>
+                      <Card.Title>Rp.{item.price} / {item.rent} <p>{Fur}</p> </Card.Title>
+                      <Card.Text>{item.bedroom} Beds,{item.bedroom}bedroom</Card.Text>
+                      <Card.Text>{item.address}</Card.Text>
+                    </Card.Body>
+                  </Card>
+          </Link>
+          </Col>
+      
+        )
+           
     })
 }
-{SharedToShow.map( item => {
-       const FurnishedValuex=item.Furnished
-       const PetValuex=item.PetAllowed
-       const ShareValuex=item.SharedCommodities
-       if(FurnishedValuex === true){
-           var Fur="Furnished"
-       }
-       if(PetValuex === true){
-        var Pet="Pet Allowed"
-    }
-    if(ShareValuex === true){
-        var Share="Shared ACommodities"
-    }
-       console.log(Fur)
-        return <div>
-             <Card style={{ width: "18rem", marginBottom: "10px" }}>
-      <Card.Img  variant="top" src={item.image} height={200} style={{ objectFit: "cover" }}   />
-      <Card.Body>
-      <div class="card-img-overlay">
-      <Card.Title style={{color:"black",textShadow:"2px, 2px"}}>
-                  <div className="room__amenity" >
-                    <p>{Fur}</p>
-                    <p>{Pet}</p>
-                    <h5>{Share}</h5>
-                  </div>
-                </Card.Title>
-        </div>
-        <Card.Title>Rp.{item.price} / {item.rent} <p>{Fur}</p> </Card.Title>
-        <Card.Text>{item.bedroom} Beds,{item.bedroom}bedroom</Card.Text>
-        <Card.Text>{item.address}</Card.Text>
-      </Card.Body>
-    </Card>
-            </div>
-    })
-}
-{PetToShow.map( item => {
-       const FurnishedValuex=item.Furnished
-       const PetValuex=item.PetAllowed
-       const ShareValuex=item.SharedCommodities
-       if(FurnishedValuex === true){
-           var Fur="Furnished"
-       }
-       if(PetValuex === true){
-        var Pet="Pet Allowed"
-    }
-    if(ShareValuex === true){
-        var Share="Shared ACommodities"
-    }
-       console.log(Fur)
-        return <div>
-             <Card style={{ width: "18rem", marginBottom: "10px" }}>
-      <Card.Img  variant="top" src={item.image} height={200} style={{ objectFit: "cover" }}   />
-      <Card.Body>
-      <div class="card-img-overlay">
-      <Card.Title style={{color:"black",textShadow:"2px, 2px"}}>
-                  <div className="room__amenity" >
-                    <p>{Fur}</p>
-                    <p>{Pet}</p>
-                    <h5>{Share}</h5>
-                  </div>
-                </Card.Title>
-        </div>
-        <Card.Title>Rp.{item.price} / {item.rent} <p>{Fur}</p> </Card.Title>
-        <Card.Text>{item.bedroom} Beds,{item.bedroom}bedroom</Card.Text>
-        <Card.Text>{item.address}</Card.Text>
-      </Card.Body>
-    </Card>
-            </div>
-    })
-}
-{FurnishedToShow.map( item => {
-       const FurnishedValuex=item.Furnished
-       const PetValuex=item.PetAllowed
-       const ShareValuex=item.SharedCommodities
-       if(FurnishedValuex === true){
-           var Fur="Furnished"
-       }
-       if(PetValuex === true){
-        var Pet="Pet Allowed"
-    }
-    if(ShareValuex === true){
-        var Share="Shared ACommodities"
-    }
-       console.log(Fur)
-        return <div>
-             <Card style={{ width: "18rem", marginBottom: "10px" }}>
-      <Card.Img  variant="top" src={item.image} height={200} style={{ objectFit: "cover" }}   />
-      <Card.Body>
-      <div class="card-img-overlay">
-      <Card.Title style={{color:"black",textShadow:"2px, 2px"}}>
-                  <div className="room__amenity" >
-                    <p>{Fur}</p>
-                    <p>{Pet}</p>
-                    <h5>{Share}</h5>
-                  </div>
-                </Card.Title>
-        </div>
-        <Card.Title>Rp.{item.price} / {item.rent} <p>{Fur}</p> </Card.Title>
-        <Card.Text>{item.bedroom} Beds,{item.bedroom}bedroom</Card.Text>
-        <Card.Text>{item.address}</Card.Text>
-      </Card.Body>
-    </Card>
-            </div>
-    })
-}
+</Row>
+
          
           </>
 

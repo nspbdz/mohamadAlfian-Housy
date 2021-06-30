@@ -41,8 +41,6 @@ console.log(datas)
             type: "LOGIN_SUCCESS",
             // payload: dataLogin
             payload: {
-        name: "Alfian",
-
                     username: data.username,
                     password: data.password
                   }
