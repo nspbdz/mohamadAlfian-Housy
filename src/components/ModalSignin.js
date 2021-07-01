@@ -32,9 +32,7 @@ import userData from '../data/User'
         (user) => user.username === username
         
         )
-console.log(dataLogin)
-const datas=dataLogin;
-console.log(datas)
+
 
     if(dataLogin){
         dispatch({
@@ -44,9 +42,6 @@ console.log(datas)
                     username: data.username,
                     password: data.password
                   }
-// console.log(data.username)
-
-        // console.log(dataLogin)
 
         })
         setMessage('')

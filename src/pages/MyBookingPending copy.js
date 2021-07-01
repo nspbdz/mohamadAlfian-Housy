@@ -16,7 +16,7 @@ import brand from "../assets/images/brand.svg";
 import { ListGroup,Card,Jumbotron,Row,Col,Button,Container, } from "react-bootstrap";
 
 
-const MyBooking = ({ match }) => {
+const MyBookingHistory = ({ match }) => {
   const {state: cartState} = useContext(BookContext);
   const [item, setItem] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -38,14 +38,18 @@ const MyBooking = ({ match }) => {
   console.log(userFilter[0]);
   
 const pa =window.location.pathname
-const splitval=pa.split("/MyBooking/")
+const splitval=pa.split("/MyBookingPending/")
 const urlVal=splitval[1]
 console.log(urlVal)
 const split2=urlVal.split("/")
+const split3=urlVal.split("/")
+
 const userval=split2[0]
 const bookval=split2[1]
+const bookValStatus=split2[2]
 console.log(userval)
 console.log(bookval)
+console.log(bookValStatus)
 
 
 
@@ -102,7 +106,7 @@ const Nowss =new Date().toLocaleTimeString("en-US", {year: 'numeric', month: "lo
                           <Col sm>
                           <h4>{dataMatch.name}</h4>
                         <p>{dataMatch.address}</p>
-                        <Button variant="secondary">Waiting Payment</Button>
+                        <Button style={{backgroundColor:"transparent"}} ><p style={{color:"#FF9900"}}>Waiting Approve</p> </Button>
                           </Col>
                           <Col sm>
                           <Row>
@@ -194,15 +198,7 @@ const Nowss =new Date().toLocaleTimeString("en-US", {year: 'numeric', month: "lo
                           <Col sm={4}> </Col>
                           <Col sm={4}>
 
-                          <Link to={{
-
-                            pathname: `/MyBookingPending/${userval}/${bookval}/${bookval}`
-                          }} >
-                          <Button variant="primary" style={{width:"150px"}}>
-
-                            Pay
-                          </Button>
-                          </Link>
+                       
                              </Col>
                         </Row>
                         
@@ -228,4 +224,4 @@ const Nowss =new Date().toLocaleTimeString("en-US", {year: 'numeric', month: "lo
   </div>
   )
 }
-export default MyBooking;
+export default MyBookingHistory;

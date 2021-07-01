@@ -38,7 +38,7 @@ const MyBooking = ({ match }) => {
   console.log(userFilter[0]);
   
 const pa =window.location.pathname
-const splitval=pa.split("/MyBooking/")
+const splitval=pa.split("/MyBookingPending/")
 const urlVal=splitval[1]
 console.log(urlVal)
 const split2=urlVal.split("/")

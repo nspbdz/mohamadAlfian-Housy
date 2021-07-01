@@ -11,7 +11,7 @@ class Filter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      rent:"",
+      rent:"year",
       bathroom: "",
       bedroom: "",
       Furnished: "",
@@ -253,6 +253,8 @@ class Filter extends Component {
 
         <Col xs={8}>
           <>
+          
+        
           
           <Row>
       {bedroomsToShow.map( (item,index)  => {

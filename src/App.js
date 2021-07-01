@@ -11,12 +11,12 @@ import Signup from "./pages/Signup";
 import DetailRestaurant from "./pages/DetailRestaurant";
 import DetailProperty from "./pages/DetailProperty";
 import MyBooking from "./pages/MyBooking";
-// import LifeCycle from "./components/preferencesConcept/LifeCycle";
-
+import MyBookingPending from "./pages/MyBookingPending";
+import MyBookingHistory from "./pages/MyBookingHistory";
+import { BookContextProvider } from "./contexts/BookContext";
 import {UserContextProvider} from "./contexts/userContext";
 import { CartContextProvider } from "./contexts/cartContext";
 import Profile from "./pages/Profile";
-// import Cart from "./pages/Cart";
 
 const App = () => {
   const headerTitle = "Dumbways Batch 24";
@@ -24,7 +24,7 @@ const App = () => {
     <div className="App">
       <Router>
         <UserContextProvider>
-          <CartContextProvider>
+          <BookContextProvider>
             <Header title={headerTitle} />
             <Container fluid>
               <Switch>
@@ -33,13 +33,15 @@ const App = () => {
                 <Route exact path="/profile" component={Profile} />
                 <PrivateRoute exact path="/restaurant/:id" component={DetailRestaurant} />
                 <PrivateRoute exact path="/DetailProperty/:id" component={DetailProperty} />
-                <PrivateRoute exact path="/MyBooking/:id" component={MyBooking} />
+                <PrivateRoute exact path="/MyBooking/:user/:id" component={MyBooking} />
+                <PrivateRoute exact path="/MyBookingPending/:user/:id/:book" component={MyBookingPending} />
+                <PrivateRoute exact path="/MyBookingHistory/:user/:id/:book" component={MyBookingHistory} />
                 {/* <Route exact path="/cart" component={Cart} /> */}
                 {/* <Route exact path="/signup" component={Signup} /> */}
                 {/* <Route path="/lifecycle" component={LifeCycle} /> */}
               </Switch>
             </Container>
-          </CartContextProvider>
+          </BookContextProvider>
         </UserContextProvider>
       </Router>
     </div>

@@ -3,10 +3,7 @@ import { useState, useEffect, useContext,img } from "react";
 import data from "../data/fakeData";
 import NotFound from "./NotFound";
 import { UserContext } from "../contexts/userContext";
-import { BookContext } from "../contexts/BookContext";
 import userData from "../data/User";
-import { useHistory,Router,Link } from "react-router-dom";
-
 
 import CardList from "../components/CardList";
 import { FaBath,FaBed } from 'react-icons/fa';
@@ -16,21 +13,12 @@ import brand from "../assets/images/brand.svg";
 import { ListGroup,Card,Jumbotron,Row,Col,Button,Container, } from "react-bootstrap";
 
 
-const MyBooking = ({ match }) => {
-  const {state: cartState} = useContext(BookContext);
+const DetailProperty = ({ match }) => {
+    
   const [item, setItem] = useState(null);
   const [loading, setLoading] = useState(true);
-  // console.log(state);
-  // const [userData, setData] = useState({
-  //   booking: [],
-  //   totalAmount: 0
-  // });
-  
+  const params = useParams();
   const contextValue = useContext(UserContext);
-  const contextBookValue = useContext(BookContext);
-  console.log(contextBookValue);
-
-  console.log(contextBookValue[0]);
   console.log(contextValue[0].user.name)
   const userlogin=contextValue[0].user.username
   console.log(userlogin);
@@ -40,24 +28,17 @@ const MyBooking = ({ match }) => {
 const pa =window.location.pathname
 const splitval=pa.split("/MyBooking/")
 const urlVal=splitval[1]
-console.log(urlVal)
-const split2=urlVal.split("/")
-const userval=split2[0]
-const bookval=split2[1]
-console.log(userval)
-console.log(bookval)
-
-
+console.log(splitval)
 
 const Nowss =new Date().toLocaleTimeString("en-US", {year: 'numeric', month: "long",day: "2-digit",hour: 'numeric' })
 // const Nowss =new Date().toLocaleTimeString("en-US", {year: 'numeric', month: "long",day: "2-digit" })
-// console.log(Nowss)
+console.log(Nowss)
 //   window.location.href
 
 
   return(
     <div>
-    {data.filter(item => item.id ==bookval).map((dataMatch,index) => {
+    {data.filter(item => item.id ==urlVal).map((dataMatch,index) => {
   const FurnishedValuex=dataMatch.Furnished
   const PetValuex=dataMatch.PetAllowed
   const ShareValuex=dataMatch.SharedCommodities
@@ -75,7 +56,7 @@ const Nowss =new Date().toLocaleTimeString("en-US", {year: 'numeric', month: "lo
 <>
                         <Row className="justify-content-md-center" style={{paddingTop:"73px"}}>
                         <Col xs lg="2">
-                          
+                          1 of 3
                         </Col>
                         <Col md="auto">
                         <Row>
@@ -85,6 +66,8 @@ const Nowss =new Date().toLocaleTimeString("en-US", {year: 'numeric', month: "lo
                           <Row>
                           <Col sm={4}>
                           <img src={brand} alt="brand" />
+                        
+
 
                           </Col>
                           <Col sm={3}>
@@ -113,13 +96,17 @@ const Nowss =new Date().toLocaleTimeString("en-US", {year: 'numeric', month: "lo
                             <br></br>
                             <p>Check-Out</p>
                             <p>{Nowss} </p>
+
+
                             
                             </Col>
                             <Col sm>
                               <h5>Amenities</h5>
-                              <p>{Fur}</p>
-                              <p>{Pet}</p>
-                              <p>{Share}</p>
+                                  <p>{Fur}</p>
+                                  <p>{Pet}</p>
+                                  <p>{Share}</p>
+                              
+                              
                             </Col>
                           </Row>
                           </Col>
@@ -141,6 +128,8 @@ const Nowss =new Date().toLocaleTimeString("en-US", {year: 'numeric', month: "lo
                           <Col sm="4"><h5>Full Name</h5></Col>
                           <Col sm="4"><h5>Gender</h5></Col>
                         </Row>
+                            
+                            
                           </Col>
                           <Col sm="4"><h5>Phone</h5></Col>
                           <Col sm="4">
@@ -150,76 +139,41 @@ const Nowss =new Date().toLocaleTimeString("en-US", {year: 'numeric', month: "lo
                           </ListGroup>
                           </ListGroup.Item>
                           <ListGroup.Item>
-                          {/* <Row>
-                          <Col sm={4}> */}
-
-                              {userData.filter(item => item.username ==userval).map((items,index) => {
-                          console.log(userData)
-                          return(
-                            <>
- 
                           <Row>
                           <Col sm={4}>
                           <Row>
-                          <Col sm={4}>1 </Col>
-                          <Col sm={4}>{items.fullname} </Col>
-                          <Col sm={4}>{items.gender} </Col>
+                          <Col sm={4}>{dataMatch.nametof} </Col>
+                          <Col sm={4}>{dataMatch.nametof} </Col>
+                          <Col sm={4}>{dataMatch.nametof} </Col>
                         </Row>
-                         </Col>
-                          <Col sm={4}>{items.phone}</Col>
-                          <Col sm={2}>
-                          <p>Long Time Rent :</p>
-                          </Col>
-                          <Col sm={2}>
-                          <p>1 Year </p>
-                          </Col>
+                            </Col>
+                          <Col sm={4}>sm=4</Col>
+                          <Col sm={4}>sm=4</Col>
                         </Row>
-  </>
-
-)
-})}
-
-                          <ListGroup.Item>
-                            <Row>
-                          <Col sm={4}> </Col>
-                          <Col sm={4}> </Col>
-                          <Col sm={2}>Total : </Col>
-                          <Col sm={2}>Rp. {dataMatch.price} </Col>
-                        </Row>
-                        
-                          </ListGroup.Item>
-                          <ListGroup.Item>
-                            <Row>
-                          <Col sm={4}> </Col>
-                          <Col sm={4}> </Col>
-                          <Col sm={4}>
-
-                          <Link to={{
-
-                            pathname: `/MyBookingPending/${userval}/${bookval}/${bookval}`
-                          }} >
-                          <Button variant="primary" style={{width:"150px"}}>
-
-                            Pay
-                          </Button>
-                          </Link>
-                             </Col>
-                        </Row>
-                        
-                          </ListGroup.Item>
                           </ListGroup.Item>
                         </ListGroup>
                       </Card>
-                          <Col sm={4}></Col>
-                          <Col sm={4}> </Col>
-                          <Col sm={4}> </Col>
+                          <Col sm={4}>
+
+                          </Col>
+                          <Col sm={4}>
+                            
+                          </Col>
+                          <Col sm={4}>
+                            
+                          </Col>
                         </Row>
+                        
                         </Col>
                         <Col xs lg="2">
                           
                         </Col>
                       </Row>
+
+
+    
 </>
+
             
       )
         
@@ -228,4 +182,4 @@ const Nowss =new Date().toLocaleTimeString("en-US", {year: 'numeric', month: "lo
   </div>
   )
 }
-export default MyBooking;
+export default DetailProperty;

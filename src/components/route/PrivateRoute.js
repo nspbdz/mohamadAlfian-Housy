@@ -7,7 +7,7 @@ function PrivateRoute({ component: Component }) {
     return (
         <Route
       render={(props) =>
-        isLogin ? <Component {...props} /> : <Redirect to="/" />
+        isLogin ? <Component {...props} /> : <Redirect to="/home" />
       }
     />
     )

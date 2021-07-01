@@ -22,8 +22,8 @@ function Profile() {
 
   // <p className='h2'>{contextValue[0].user.name}</p>
 
-  const priceToShow = userData.filter(item => ( item.username === userlogin ));
-  console.log(priceToShow);
+  const userFilter = userData.filter(item => ( item.username === userlogin ));
+  console.log(userFilter);
   console.log(userData);
 
   function handleSubmit(e) {
@@ -32,7 +32,7 @@ function Profile() {
   }
   return (
     <>
- {priceToShow.map( item => {
+ {userFilter.map( item => {
       
     
       //  console.log(Fur)

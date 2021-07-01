@@ -7,7 +7,7 @@ import ModalSignin from "./ModalSignin";
 import ModalSignup from "./ModalSignup";
 import data from "../data/fakeData";
 import brand from "../assets/images/brand.svg";
-
+import Drops from "../components/Drops"
 import "../styles/customStyle.css";
 function Header() {
   const [state, dispatch] = useContext(UserContext);
@@ -31,22 +31,20 @@ function Header() {
                 <Container>
                   
                     <Nav className="me-auto">
-                        <Link to="/" className="btn btn-light">Home</Link>
-                        <Link to="/about" className="btn btn-light">About</Link>
-                        <Link to="/product" className="btn btn-light">Product</Link>
-                        <Link to="/profile" className="btn btn-light">Profile</Link>
                     </Nav>
                     <Nav className="ms-auto">
-                    {!state.isLogin ?
+                    {!state.isLogin 
+                    ?
                     <>
-                        <Button onClick={handleShow} className="mr-3 my-2">Login</Button>
-                        <Button className="mr-3 my-2" onClick={() => setshowSignUp(true)} >Sign Up</Button> 
+                        <Button onClick={handleShow} >Login</Button>
+                        <Button  onClick={() => setshowSignUp(true)} >Sign Up</Button> 
                     </>
 
                         :
                         
                         // <Button onClick={handleShow} className="mr-3 my-2">Logout</Button>
-                        <Image style={{width:"50px"}} src="https://ujhw03sswsepgw3234x0qm51-wpengine.netdna-ssl.com/wp-content/uploads/2018/05/171025-202659-Donnely-Christopher-400x400x72.jpg" roundedCircle />
+                      <Drops  />
+                        // <Image style={{width:"50px"}} src="https://ujhw03sswsepgw3234x0qm51-wpengine.netdna-ssl.com/wp-content/uploads/2018/05/171025-202659-Donnely-Christopher-400x400x72.jpg" roundedCircle />
 
                      }
 

@@ -3,6 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../contexts/userContext";
 import ModalSignin from "../components/ModalSignin";
 import { useHistory,Router,Link } from "react-router-dom";
+import userData from "../data/User";
 
 // import { Row, Col } from "react-bootstrap";
 import data from "../data/fakeData";
@@ -28,9 +29,19 @@ const DetailProperty = ({ match }) => {
   const [loading, setLoading] = useState(true);
   const params = useParams();
 const pa =window.location.pathname
-const splitval=pa.split("/detailProperty/")
+const splitval=pa.split("/detailProperty/" )
 const urlVal=splitval[1]
 console.log(urlVal)
+  const contextValue = useContext(UserContext);
+  console.log(contextValue[0].user.name)
+  const userlogin=contextValue[0].user.username
+  console.log(userlogin);
+  const userFilter = userData.filter(item => ( item.username === userlogin ));
+  console.log(userFilter[0]);
+  
+// const userId=userFilter[0][id]
+// console.log(userId);
+
 
 
 
@@ -141,8 +152,8 @@ console.log(urlVal)
                         :
 
                         <Link to={{
-                            // id:item.id,
-                            pathname: `/MyBooking/${urlVal}`
+                            userdatasend:userlogin,
+                            pathname: `/MyBooking/${userlogin}/${urlVal}`
                           }} >
                         <Col sm><Button onClick={handleBook} style={{width:"213px"}}>Book Now</Button></Col>
                         
